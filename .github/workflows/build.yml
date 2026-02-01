@@ -1,7 +1,7 @@
 name: Build Nav-Item for Alwaysdata
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # 手动触发
 
 jobs:
   build:
@@ -14,16 +14,29 @@ jobs:
         with:
           node-version: 18
 
-      - name: Prepare Deployment Package
+      - name: Build Frontend
         run: |
-          # 1. 既然没有 build 命令，我们直接安装依赖
+          # 进入前端源码目录
+          cd web
+          # 安装前端依赖
+          npm install
+          # 执行编译，生成 dist 文件夹
+          npm run build
+          cd ..
+
+      - name: Build Backend & Package
+        run: |
+          # 1. 在根目录安装后端生产环境依赖
           npm install --production
           
-          # 2. 创建一个部署用的压缩包，包含当前目录下所有文件
-          # Alwaysdata 只需要运行环境，我们把 package.json, node_modules 和所有 js/html 文件都打进去
+          # 2. 检查关键文件是否存在（调试用）
+          ls -R web/dist
+          
+          # 3. 创建部署包
+          # 包含根目录的 js 文件、node_modules、package.json 以及刚生成的 web/dist
           tar -czf nav_item_alwaysdata.tar.gz ./*
 
-      - name: Upload Artifact
+      - name: Upload Result
         uses: actions/upload-artifact@v4
         with:
           name: nav-item-final-package
