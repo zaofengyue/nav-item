@@ -12,28 +12,23 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20 # 升级到 Node 20 以适配 Vite 7
+          node-version: 20 # 必须是 20 或更高版本才能运行新版 Vite
 
       - name: Build Frontend
         run: |
-          # 进入前端目录构建
           cd web
           npm install
-          npm run build
+          npm run build # 这一步成功后才会生成 dist 文件夹
           cd ..
 
       - name: Build Backend & Package
         run: |
-          # 安装后端依赖
           npm install --production
-          
-          # 检查编译产物是否存在
+          # 检查编译产物，确保 dist 真的存在
           if [ ! -d "web/dist" ]; then
-            echo "Error: web/dist directory not found!"
+            echo "Error: dist folder was not created!"
             exit 1
           fi
-          
-          # 打包所有文件
           tar -czf nav_item_alwaysdata.tar.gz ./*
 
       - name: Upload Result
