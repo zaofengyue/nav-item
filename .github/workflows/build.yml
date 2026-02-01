@@ -1,7 +1,7 @@
 name: Build Nav-Item for Alwaysdata
 
 on:
-  workflow_dispatch: # 手动触发
+  workflow_dispatch:
 
 jobs:
   build:
@@ -12,28 +12,28 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20 # 升级到 Node 20 以适配 Vite 7
 
       - name: Build Frontend
         run: |
-          # 进入前端源码目录
+          # 进入前端目录构建
           cd web
-          # 安装前端依赖
           npm install
-          # 执行编译，生成 dist 文件夹
           npm run build
           cd ..
 
       - name: Build Backend & Package
         run: |
-          # 1. 在根目录安装后端生产环境依赖
+          # 安装后端依赖
           npm install --production
           
-          # 2. 检查关键文件是否存在（调试用）
-          ls -R web/dist
+          # 检查编译产物是否存在
+          if [ ! -d "web/dist" ]; then
+            echo "Error: web/dist directory not found!"
+            exit 1
+          fi
           
-          # 3. 创建部署包
-          # 包含根目录的 js 文件、node_modules、package.json 以及刚生成的 web/dist
+          # 打包所有文件
           tar -czf nav_item_alwaysdata.tar.gz ./*
 
       - name: Upload Result
