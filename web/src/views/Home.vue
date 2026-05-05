@@ -341,7 +341,7 @@ function handleLogoError(event) {
 
 .home-container {
   min-height: 95vh;
-  background-image: url('https://image.yzfy.dpdns.org/2026/04/1221a09a2b03ae8805076ed120495bb5.png');
+  background-image: url('https://image.yzfy.dpdns.org/2026/05/3701899e7ceb71d01acbdfa267d90e31.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
