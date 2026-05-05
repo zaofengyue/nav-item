@@ -63,7 +63,7 @@
           </svg>
           友情链接
         </button>
-        <p class="copyright">Copyright © 2025 Nav-Item | <a href="https://github.com/eooce/Nav-Item" target="_blank" class="footer-link">Powered by eooce</a></p>
+        <p class="copyright">Copyright © 2025 Nav-Item | <a href="https://github.com/zaofengyue/nav-item" target="_blank" class="footer-link">Powered by eooce</a></p>
       </div>
     </footer>
 
@@ -134,10 +134,10 @@ const searchEngines = [
     url: q => `https://www.google.com/search?q=${encodeURIComponent(q)}`
   },
   {
-    name: 'baidu',
-    label: '百度',
-    placeholder: '百度搜索...',
-    url: q => `https://www.baidu.com/s?wd=${encodeURIComponent(q)}`
+    name: 'duckduckgo',
+    label: 'DuckDuckGo',
+    placeholder: 'DuckDuckGo 搜索...',
+    url: q => `https://duckduckgo.com/?q=${encodeURIComponent(q)}`
   },
   {
     name: 'bing',
@@ -341,7 +341,7 @@ function handleLogoError(event) {
 
 .home-container {
   min-height: 95vh;
-  background-image: url('https://main.ssss.nyc.mn/background.webp');
+  background-image: url('https://image.yzfy.dpdns.org/2026/04/0a19539b2e7a160600e33898f213387e.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
