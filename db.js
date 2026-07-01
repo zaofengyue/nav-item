@@ -141,12 +141,6 @@ db.serialize(() => {
             { menu: 'Cloud', title: '魔塔社区', url: 'https://www.modelscope.cn/home', logo_url: 'https://g.alicdn.com/sail-web/maas/2.13.63/favicon/128.ico', desc: '云主机', order: 0 },
             { menu: 'Cloud', title: 'Zo computer', url: 'https://fengyue.zo.computer', logo_url: '', desc: '云电脑', order: 0 },
             { menu: 'Cloud', title: 'Hi168', url: 'https://www.hi168.com/#/desktop', logo_url: '', desc: '免费S3存储', order: 0 },
-            { menu: 'Cloud', title: 'Adkynet', url: 'https://manager.adkynet.com', logo_url: 'https://manager.adkynet.com/assets/img/logo.png', desc: '月抛机', order: 1 },
-            { menu: 'Cloud', title: 'CT8', url: 'https://panel.ct8.pl', logo_url: '', desc: '', order: 2 },
-            { menu: 'Cloud', title: 'Skybots', url: 'https://skybots.tech/dashboard/mes-bots', logo_url: 'https://skybots.tech/images/skybots.png', desc: '6h续期', order: 3 },
-            { menu: 'Cloud', title: 'Wispbyte', url: 'https://wispbyte.com/client/dashboard', logo_url: 'https://wispbyte.com/client/assets/wispbyte_blue_nobg.webp', desc: '', order: 4 },
-            { menu: 'Cloud', title: 'SAP企业版', url: 'https://emea.cockpit.btp.cloud.sap/cockpit/#', logo_url: '', desc: '', order: 5 },
-            { menu: 'Cloud', title: 'SPA试用版', url: 'https://account.hanatrial.ondemand.com/trial/#/home/trial', logo_url: '', desc: '', order: 6 },
             // Software
             { menu: 'Software', title: 'Hellowindows', url: 'https://hellowindows.cn', logo_url: 'https://hellowindows.cn/logo-s.png', desc: 'windows系统及office下载', order: 0 },
             { menu: 'Software', title: '奇迹秀', url: 'https://www.qijishow.com/down', logo_url: 'https://www.qijishow.com/img/ico.ico', desc: '设计师的百宝箱', order: 0 },
