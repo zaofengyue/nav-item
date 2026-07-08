@@ -2,9 +2,10 @@ const express = require('express');
 const db = require('../db');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const config = require('../config');
 const router = express.Router();
 
-const JWT_SECRET = 'your_jwt_secret_key';
+const JWT_SECRET = config.server.jwtSecret;
 
 function getClientIp(req) {
   let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || '';
