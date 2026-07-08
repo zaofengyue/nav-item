@@ -3,6 +3,9 @@ const BASE = '/api';
 
 export const login = (username, password) => axios.post(`${BASE}/login`, { username, password });
 
+// 站点设置API（名称/logo/背景图）
+export const getSettings = () => axios.get(`${BASE}/settings`);
+
 function authHeaders() {
   const token = localStorage.getItem('token');
   return token ? { Authorization: `Bearer ${token}` } : {};
