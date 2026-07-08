@@ -1,40 +1,34 @@
 <template>
   <nav class="menu-bar">
-    <div v-if="siteLogo || siteTitle" class="brand-row">
-      <img v-if="siteLogo" :src="siteLogo" :alt="siteTitle" class="brand-logo" />
-      <span v-if="siteTitle" class="brand-title">{{ siteTitle }}</span>
-    </div>
-    <div class="menu-row">
+    <div 
+      v-for="menu in menus" 
+      :key="menu.id" 
+      class="menu-item"
+      @mouseenter="showSubMenu(menu.id)"
+      @mouseleave="hideSubMenu(menu.id)"
+    >
+      <button 
+        @click="$emit('select', menu)" 
+        :class="{active: menu.id === activeId}"
+      >
+        {{ menu.name }}
+      </button>
+      
+      <!-- 二级菜单 -->
       <div 
-        v-for="menu in menus" 
-        :key="menu.id" 
-        class="menu-item"
-        @mouseenter="showSubMenu(menu.id)"
-        @mouseleave="hideSubMenu(menu.id)"
+        v-if="menu.subMenus && menu.subMenus.length > 0" 
+        class="sub-menu"
+        :class="{ 'show': hoveredMenuId === menu.id }"
       >
         <button 
-          @click="$emit('select', menu)" 
-          :class="{active: menu.id === activeId}"
+          v-for="subMenu in menu.subMenus" 
+          :key="subMenu.id"
+          @click="$emit('select', subMenu, menu)"
+          :class="{active: subMenu.id === activeSubMenuId}"
+          class="sub-menu-item"
         >
-          {{ menu.name }}
+          {{ subMenu.name }}
         </button>
-        
-        <!-- 二级菜单 -->
-        <div 
-          v-if="menu.subMenus && menu.subMenus.length > 0" 
-          class="sub-menu"
-          :class="{ 'show': hoveredMenuId === menu.id }"
-        >
-          <button 
-            v-for="subMenu in menu.subMenus" 
-            :key="subMenu.id"
-            @click="$emit('select', subMenu, menu)"
-            :class="{active: subMenu.id === activeSubMenuId}"
-            class="sub-menu-item"
-          >
-            {{ subMenu.name }}
-          </button>
-        </div>
       </div>
     </div>
   </nav>
@@ -46,9 +40,7 @@ import { ref } from 'vue';
 const props = defineProps({ 
   menus: Array, 
   activeId: Number,
-  activeSubMenuId: Number,
-  siteLogo: String,
-  siteTitle: String
+  activeSubMenuId: Number 
 });
 
 const hoveredMenuId = ref(null);
@@ -70,54 +62,14 @@ function hideSubMenu(menuId) {
 <style scoped>
 .menu-bar {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 1rem;
-  position: relative;
-}
-
-.menu-row {
-  display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  padding: 0 1rem;
   position: relative;
 }
 
 .menu-item {
   position: relative;
-}
-
-.brand-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  padding-bottom: 0.6rem;
-}
-
-.brand-logo {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-.brand-title {
-  color: #fff;
-  font-size: 1.3rem;
-  font-weight: 600;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  white-space: nowrap;
-}
-
-@media (max-width: 768px) {
-  .brand-title {
-    font-size: 1rem;
-  }
-  .brand-logo {
-    width: 26px;
-    height: 26px;
-  }
 }
 
 .menu-bar button {
