@@ -86,6 +86,10 @@ nav-item/
 - `PORT`: 服务器端口号（默认: 3000）
 - `ADMIN_USERNAME`: 管理员用户名（默认: admin）
 - `ADMIN_PASSWORD`: 管理员密码（默认: 123456）
+- `JWT_SECRET`: JWT签名密钥，生产环境务必修改为随机字符串（默认: 内置示例密钥，不安全）
+- `SITE_TITLE`: 导航站名称，显示在浏览器标签页标题和菜单栏（默认: 风月的导航站-个人专属导航页）
+- `SITE_LOGO`: 导航站logo图片地址，显示在菜单栏和favicon（默认: 无）
+- `SITE_BACKGROUND`: 首页背景图片地址（默认: 内置示例背景图）
 
 ### 数据库配置
 系统使用 SQLite 数据库，数据库文件会自动创建在项目/database/目录下，使用docker部署请挂载/app/database目录实现数据持久化
@@ -134,6 +138,10 @@ cd .. && npm start
      -e NODE_ENV=production \
      -e ADMIN_USERNAME=admin \
      -e ADMIN_PASSWORD=123456 \
+     -e JWT_SECRET=your_own_random_secret \
+     -e SITE_TITLE="我的导航站" \
+     -e SITE_LOGO=https://example.com/logo.png \
+     -e SITE_BACKGROUND=https://example.com/background.jpg \
      eooce/nav-item
    ```
 ### 2: docker-compose.yaml 部署
@@ -150,6 +158,10 @@ services:
       - PORT=3000             # 监听端口
       - ADMIN_USERNAME=admin  # 后台用户名
       - ADMIN_PASSWORD=123456 # 后台密码
+      - JWT_SECRET=your_own_random_secret  # JWT签名密钥，务必修改
+      - SITE_TITLE=我的导航站                # 导航站名称
+      - SITE_LOGO=https://example.com/logo.png       # 站点logo地址
+      - SITE_BACKGROUND=https://example.com/bg.jpg    # 首页背景图地址
     volumes:
       - ./database:/app/database  # 持久化数据库
     restart: unless-stopped
