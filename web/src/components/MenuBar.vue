@@ -1,5 +1,9 @@
 <template>
   <nav class="menu-bar">
+    <div v-if="siteLogo || siteTitle" class="brand">
+      <img v-if="siteLogo" :src="siteLogo" :alt="siteTitle" class="brand-logo" />
+      <span v-if="siteTitle" class="brand-title">{{ siteTitle }}</span>
+    </div>
     <div 
       v-for="menu in menus" 
       :key="menu.id" 
@@ -40,7 +44,9 @@ import { ref } from 'vue';
 const props = defineProps({ 
   menus: Array, 
   activeId: Number,
-  activeSubMenuId: Number 
+  activeSubMenuId: Number,
+  siteLogo: String,
+  siteTitle: String
 });
 
 const hoveredMenuId = ref(null);
@@ -70,6 +76,39 @@ function hideSubMenu(menuId) {
 
 .menu-item {
   position: relative;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+}
+
+.brand-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.brand-title {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .brand-title {
+    font-size: 0.9rem;
+  }
+  .brand-logo {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 .menu-bar button {
