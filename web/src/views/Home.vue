@@ -1,10 +1,12 @@
 <template>
-  <div class="home-container">
+  <div class="home-container" :style="homeBackgroundStyle">
     <div class="menu-bar-fixed">
       <MenuBar 
         :menus="menus" 
         :activeId="activeMenu?.id" 
         :activeSubMenuId="activeSubMenu?.id"
+        :siteLogo="siteSettings.logo"
+        :siteTitle="siteSettings.title"
         @select="selectMenu"
       />
     </div>
@@ -112,8 +114,15 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { getMenus, getCards, getAds, getFriends } from '../api';
+import { siteSettings } from '../settings';
 import MenuBar from '../components/MenuBar.vue';
 import CardGrid from '../components/CardGrid.vue';
+
+// 默认背景图作为兜底（未配置SITE_BACKGROUND环境变量时使用）
+const DEFAULT_BACKGROUND = 'https://image.yzfy.dpdns.org/2026/05/3701899e7ceb71d01acbdfa267d90e31.png';
+const homeBackgroundStyle = computed(() => ({
+  backgroundImage: `url('${siteSettings.background || DEFAULT_BACKGROUND}')`
+}));
 
 const menus = ref([]);
 const activeMenu = ref(null);
@@ -341,7 +350,6 @@ function handleLogoError(event) {
 
 .home-container {
   min-height: 95vh;
-  background-image: url('https://image.yzfy.dpdns.org/2026/05/3701899e7ceb71d01acbdfa267d90e31.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
