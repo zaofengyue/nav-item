@@ -5,8 +5,6 @@
         :menus="menus" 
         :activeId="activeMenu?.id" 
         :activeSubMenuId="activeSubMenu?.id"
-        :siteLogo="siteSettings.logo"
-        :siteTitle="siteSettings.title"
         @select="selectMenu"
       />
     </div>
